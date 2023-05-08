@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Login</title>
+    <!-- style.css 적용이 안되서 version을 다른걸로 보내서 인식하게 함  -->
+    <link rel="stylesheet" href="/resources/login.css">
+</head>
+<body>
+<h1>Chan0-Site</h1>
+<div class="login-container">
+    <form th:method="post" th:action="@{/login/}" th:object="${loginRequest}">
+        <label >Username:</label>
+        <input type="text" placeholder="아이디를 입력하세요" name="id" required>
+
+        <label >Password:</label>
+        <input type="password"  placeholder="비밀번호를 입력하세요" name="password" required>
+
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+</body>
+</html>

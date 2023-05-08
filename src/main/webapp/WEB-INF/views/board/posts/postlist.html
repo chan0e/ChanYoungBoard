@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" href="/resources/post.css"/>
+</head>
+<body>
+<h1>Post List</h1>
+
+<form th:method="post" th:action="@{/logout}">
+    <div class="logout-container">
+        <span class="logout-name" th:text="${user.name}"></span>
+        <button type="submit" class="logout-button">로그아웃</button>
+    </div>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>작성시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${postPage.list}">
+        <td th:text="${post.id}"></td>
+
+        <td>
+            <a th:href="@{./postview(page=${postPage.pageNumber}, size=${postPage.pageSize}, id=${post.id})}" th:text="${post.title}"></a>
+        </td>
+
+        <td th:text="${post.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="page">
+    <a class="button" th:href="@{./(page=${postPage.pageNumber-1} , size=${postPage.pageSize}  )}"
+       th:if="${postPage.pageNumber gt 1}">이전</a>
+    <span th:text="${postPage.pageNumber}"/>/<span th:text="${postPage.totalPageCount}"/>
+    <a class="button" th:href="@{./(page=${postPage.pageNumber+1} , size=${postPage.pageSize}  )}"
+       th:if="${postPage.pageNumber lt postPage.totalPageCount}">다음</a>
+</div>
+</body>
+</html>
